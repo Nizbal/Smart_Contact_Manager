@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+<head>
+  <title>Home</title>
+</head>
+<body>
+<section>
+  <div class="container text-center">
+    <div class="container text-center">
+      <img th:src="@{/img/}+${user.imageUrl}" style="height: 350px; width: 350px; border-radius:50%;" />
+    </div>
+    <div >
+    <h3>User name: </h3><h5><span th:text="${user.name}"></span></h5>
+    <h3>Email: </h3><h5><span th:text="${user.email}"></span></h5>
+    <h3>Role: </h3><h5><span th:text="${user.role}"></span></h5>
+    <h3>Is Enabled: </h3><h5><span th:text="${user.enabled}"></span></h5>
+    <h3>About: </h3><h5><span th:text="${user.about}"></span></h5>
+  </div>
+  <script src="index.js"></script>
+</section>
+</body>
+</html>

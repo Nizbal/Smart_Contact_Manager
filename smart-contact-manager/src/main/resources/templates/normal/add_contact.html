@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+<head>
+  <title>Add Contact</title>
+</head>
+<body>
+<section>
+  <div class="card">
+    <div class="card-body">
+      <div class="text-center"><img th:src="@{/img/register_icon.png}" style="width: 90px; height: 70px;">
+      </div>
+      <h1 class="text-center">Add Contact</h1>
+      <div th:if="${session.message}" th:classappend="${session.message.type}" class="text-center alert" role="alert" >
+        <p th:text="${session.message.content}"></p>
+      </div>
+      <div class="container-fluid mt-1">
+        <div class="row">
+          <div class="col-md-10 offset-md-1" >
+            <form th:action="@{/user/process-contact}" th:object="${contact}" enctype="multipart/form-data"
+             method="post" class="mt-2">
+
+              <!-- First name -->
+              <div class="form-group">
+                <label for="firstname">First name<span><sup class="red-star">★</sup></span>: </label>
+                <input type="text"
+                       class="form-control"
+                       th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
+                       id="firstname" name="name"
+                       th:value="${contact.name}"
+                       placeholder="Enter here"/>
+                <div class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}"></div>
+              </div>
+
+              <!-- Second name -->
+              <div class="form-group">
+                <label for="secondname">Second name: </label>
+                <input type="text" class="form-control" id="secondname" name="secondName" placeholder="Enter here" th:value="${contact.secondName}"/>
+              </div>
+
+              <!-- Work -->
+              <div class="form-group">
+                <label for="work">Work<span><sup class="red-star">★</sup></span>: </label>
+                <input type="text"
+                       class="form-control"
+                       th:classappend="${#fields.hasErrors('work') ? 'is-invalid' : ''}"
+                       th:value="${contact.work}"
+                       id="work" name="work" placeholder="Enter here"/>
+                <div class="invalid-feedback" th:each="e : ${#fields.errors('work')}" th:text="${e}"></div>
+              </div>
+
+              <!-- Email -->
+              <div class="form-group">
+                <label for="email">Email<span><sup class="red-star">★</sup></span>: </label>
+                <input type="text" class="form-control"
+                       th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
+                       th:value="${contact.email}"
+                       id="email" name="email"
+                       placeholder="Enter here"/>
+                <div class="invalid-feedback" th:each="e : ${#fields.errors('email')}" th:text="${e}"></div>
+              </div>
+
+              <!-- Phone -->
+              <div class="form-group">
+                <label for="phone">Phone<span><sup class="red-star">★</sup></span>: </label>
+                <input type="number"
+                       class="form-control"
+                       th:classappend="${#fields.hasErrors('phone') ? 'is-invalid' : ''}"
+                       th:value="${contact.phone}"
+                       id="phone" name="phone"
+                       placeholder="Enter here"/>
+                <div class="invalid-feedback" th:each="e : ${#fields.errors('phone')}" th:text="${e}"></div>
+              </div>
+
+              <div class="form-group mt-3">
+                <textarea name="description" placeholder="Enter here" th:value="${contact.description}" id="description" rows="10" class="form-control"></textarea>
+              </div>
+
+              <!-- Image -->
+              <div class="custom-file">
+                <label>Profile image</label>
+                <input type="file" name="img" />
+              </div>
+
+              <div class="container text-center">
+                <button class="btn btn-outline-primary btn-block">Save Contact</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
